@@ -1,0 +1,15 @@
+/*#categoryListView .list-cell{
+    -fx-background-color: #EEEEEE;
+}
+
+#categoryListView .list-cell:selected{
+    -fx-background-color: white;
+}
+
+#taskListView .list-cell{
+    -fx-background-color: #F8F8F8;
+}
+
+#taskListView .list-cell:selected{
+    -fx-background-color: white;
+}*/

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <left>
+        <HBox alignment="CENTER" BorderPane.alignment="CENTER">
+            <children>
+                <Circle fx:id="statusCircle" fill="WHITE" radius="8.0" stroke="#cccccc" />
+                <Label fx:id="statusLabel" text="Label">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                    <padding>
+                        <Insets left="10.0" />
+                    </padding>
+                </Label>
+            </children>
+            <padding>
+                <Insets left="10.0" />
+            </padding>
+        </HBox>
+    </left>
+    <right>
+        <Label fx:id="dateLabel" text="05/23/2020" BorderPane.alignment="CENTER">
+            <font>
+                <Font name="System Italic" size="12.0" />
+            </font>
+            <padding>
+                <Insets right="10.0" />
+            </padding>
+        </Label>
+    </right>
+</BorderPane>
