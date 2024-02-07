@@ -1,7 +1,7 @@
-package com.yusufsezer.ystodofx.service;
+package com.yusufsezer.service;
 
-import com.yusufsezer.ystodofx.contract.AbstractService;
-import com.yusufsezer.ystodofx.model.Task;
+import com.yusufsezer.contract.AbstractService;
+import com.yusufsezer.model.Task;
 import javax.persistence.EntityManager;
 
 public class TaskService extends AbstractService<Task> {

@@ -1,11 +1,11 @@
-package com.yusufsezer.ystodofx.util;
+package com.yusufsezer.util;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXMLLoader;
 
-public class JavaFXUtil {
+public class JavaFXUtils {
 
     public final static String BUNDLE_NAME = "bundle/text";
     public final static String FXML_PATH = "fxml/";
@@ -19,19 +19,16 @@ public class JavaFXUtil {
     }
 
     public static FXMLLoader loadFXMLFromResource(String fxml) {
-        URL url = JavaFXUtil.class.getClassLoader().getResource(fxml);
-        ResourceBundle rb = ResourceBundle.getBundle(JavaFXUtil.BUNDLE_NAME);
+        URL url = JavaFXUtils.class.getClassLoader().getResource(fxml);
+        ResourceBundle rb = ResourceBundle.getBundle(JavaFXUtils.BUNDLE_NAME);
         return new FXMLLoader(url, rb);
     }
 
     public static String getBundleMessage(String msg) {
-        return ResourceBundle
-                .getBundle(JavaFXUtil.BUNDLE_NAME)
-                .getString(msg);
+        return ResourceBundle.getBundle(JavaFXUtils.BUNDLE_NAME).getString(msg);
     }
 
-    public static <T> T loadCustomFXML(String dir, String fxml,
-            Object controller) {
+    public static <T> T loadCustomFXML(String dir, String fxml, Object controller) {
         try {
             FXMLLoader loader = loadFXMLFromDirectory(dir, fxml);
             loader.setController(controller);

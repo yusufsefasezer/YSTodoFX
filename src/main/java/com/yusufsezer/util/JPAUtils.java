@@ -1,14 +1,14 @@
-package com.yusufsezer.ystodofx.util;
+package com.yusufsezer.util;
 
-import com.yusufsezer.ystodofx.service.CategoryService;
-import com.yusufsezer.ystodofx.service.TaskService;
+import com.yusufsezer.service.CategoryService;
+import com.yusufsezer.service.TaskService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-public class JPAUtil {
+public class JPAUtils {
 
     private static final String PERSISTENCE_UNIT_NAME = "YSTodoFXPU";
     private static EntityManagerFactory emf;
@@ -16,12 +16,9 @@ public class JPAUtil {
 
     static {
         try {
-            emf = Persistence
-                    .createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+            emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         } catch (Throwable ex) {
-            Logger
-                    .getLogger(JPAUtil.class.getName())
-                    .log(Level.SEVERE, null, ex);
+            Logger.getLogger(JPAUtils.class.getName()).log(Level.SEVERE, null, ex);
             throw new ExceptionInInitializerError(ex);
         }
     }

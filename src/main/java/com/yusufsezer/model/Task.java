@@ -1,6 +1,6 @@
-package com.yusufsezer.ystodofx.model;
+package com.yusufsezer.model;
 
-import com.yusufsezer.ystodofx.contract.BaseEntity;
+import com.yusufsezer.contract.BaseEntity;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;

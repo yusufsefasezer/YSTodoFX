@@ -1,13 +1,13 @@
-package com.yusufsezer.ystodofx.util;
+package com.yusufsezer.util;
 
-import com.yusufsezer.ystodofx.model.Category;
-import com.yusufsezer.ystodofx.model.Task;
+import com.yusufsezer.model.Category;
+import com.yusufsezer.model.Task;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class DummyDataUtil {
+public class DummyDataUtils {
 
     public final static List<Category> CATEGORIES = new ArrayList<>();
     public final static List<Task> TASKS = new ArrayList<>();
@@ -156,9 +156,7 @@ public class DummyDataUtil {
     }
 
     public static Task.Status getRandStatus() {
-        return Math.random() < 0.5
-                ? Task.Status.COMPLETED
-                : Task.Status.UNCOMPLETED;
+        return Math.random() < 0.5 ? Task.Status.COMPLETED : Task.Status.UNCOMPLETED;
     }
 
 }

@@ -1,10 +1,10 @@
-package com.yusufsezer.ystodofx.controller.custom;
+package com.yusufsezer.controller.custom;
 
-import com.yusufsezer.ystodofx.controller.dialog.CategoryDialogController;
-import com.yusufsezer.ystodofx.model.Category;
-import com.yusufsezer.ystodofx.service.CategoryService;
-import com.yusufsezer.ystodofx.util.JPAUtil;
-import com.yusufsezer.ystodofx.util.JavaFXUtil;
+import com.yusufsezer.controller.dialog.CategoryDialogController;
+import com.yusufsezer.model.Category;
+import com.yusufsezer.service.CategoryService;
+import com.yusufsezer.util.JPAUtils;
+import com.yusufsezer.util.JavaFXUtils;
 import java.util.Optional;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -30,7 +30,7 @@ public class CategoryCellController extends ListCell<Category> {
         Optional<Category> result = CategoryDialogController
                 .createEditCategoryDialog(getItem());
         if (result.isPresent()) {
-            CategoryService categoryService = JPAUtil
+            CategoryService categoryService = JPAUtils
                     .getCategoryService();
             categoryService
                     .edit(result.get());
@@ -49,12 +49,12 @@ public class CategoryCellController extends ListCell<Category> {
     protected void updateItem(Category category, boolean empty) {
         super.updateItem(category, empty);
         if (!empty) {
-            setGraphic(JavaFXUtil.
+            setGraphic(JavaFXUtils.
                     <Node>loadCustomFXML("fxml/custom/", "category", this));
             categoryName.setText(category.getName());
             categoryColor.setFill(Color.web(category.getColor()));
             categoryCount.setText(String
-                    .valueOf(JPAUtil
+                    .valueOf(JPAUtils
                             .getCategoryService()
                             .find(category.getId())
                             .getTasks()

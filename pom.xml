@@ -66,7 +66,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.4</version>
                 <configuration>
-                    <mainClass>com.yusufsezer.YSTodoFXApp</mainClass>
+                    <mainClass>com.yusufsezer.App</mainClass>
                     <launcher>launch</launcher>
                 </configuration>
                 <executions>

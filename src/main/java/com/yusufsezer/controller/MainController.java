@@ -1,13 +1,13 @@
-package com.yusufsezer.ystodofx.controller;
+package com.yusufsezer.controller;
 
-import com.yusufsezer.ystodofx.controller.custom.CategoryCellController;
-import com.yusufsezer.ystodofx.controller.custom.TaskCellController;
-import com.yusufsezer.ystodofx.controller.dialog.CategoryDialogController;
-import com.yusufsezer.ystodofx.controller.dialog.TaskDialogController;
-import com.yusufsezer.ystodofx.model.Category;
-import com.yusufsezer.ystodofx.model.Task;
-import com.yusufsezer.ystodofx.util.DummyDataUtil;
-import com.yusufsezer.ystodofx.util.JPAUtil;
+import com.yusufsezer.controller.custom.CategoryCellController;
+import com.yusufsezer.controller.custom.TaskCellController;
+import com.yusufsezer.controller.dialog.CategoryDialogController;
+import com.yusufsezer.controller.dialog.TaskDialogController;
+import com.yusufsezer.model.Category;
+import com.yusufsezer.model.Task;
+import com.yusufsezer.util.DummyDataUtils;
+import com.yusufsezer.util.JPAUtils;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -16,14 +16,14 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
-import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
 import org.kordamp.ikonli.javafx.FontIcon;
 
 public class MainController implements Initializable {
@@ -50,7 +50,7 @@ public class MainController implements Initializable {
     private TextField quickAddTextField;
 
     ObservableList<Category> observableList = FXCollections
-            .observableList(DummyDataUtil.CATEGORIES);
+            .observableList(DummyDataUtils.CATEGORIES);
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -94,7 +94,7 @@ public class MainController implements Initializable {
         Optional<Category> result = CategoryDialogController
                 .createAddCategoryDialog();
         if (result.isPresent()) {
-            JPAUtil
+            JPAUtils
                     .getCategoryService()
                     .create(result.get());
             loadCategories();
@@ -108,7 +108,7 @@ public class MainController implements Initializable {
             Optional<Task> result = TaskDialogController
                     .createAddTaskDialog(quickAddTextField.getText());
             if (result.isPresent()) {
-                JPAUtil
+                JPAUtils
                         .getTaskService()
                         .create(result.get());
             }
@@ -139,28 +139,19 @@ public class MainController implements Initializable {
             Optional<Task> result = TaskDialogController
                     .createEditTaskDialog(selectedTask);
             if (result.isPresent()) {
-                JPAUtil
-                        .getTaskService()
-                        .edit(result.get());
+                JPAUtils.getTaskService().edit(result.get());
             }
         }
     }
 
     @FXML
     void onMouseRemovePressed(MouseEvent event) {
-        Task selectedTask = taskListView.getSelectionModel()
-                .getSelectedItem();
+        Task selectedTask = taskListView.getSelectionModel().getSelectedItem();
         if (selectedTask != null) {
             selectedTask.setDeleted(true);
-            JPAUtil
-                    .getTaskService()
-                    .edit(selectedTask);
-            taskListView
-                    .getItems()
-                    .remove(selectedTask);
-            taskListView
-                    .getSelectionModel()
-                    .selectFirst();
+            JPAUtils.getTaskService().edit(selectedTask);
+            taskListView.getItems().remove(selectedTask);
+            taskListView.getSelectionModel().selectFirst();
         }
     }
 
@@ -174,30 +165,18 @@ public class MainController implements Initializable {
     }
 
     void showCategoryTasks(Category category) {
-        taskListView
-                .getItems()
-                .setAll(JPAUtil
-                        .getCategoryService()
-                        .find(category.getId())
-                        .getTasks());
+        taskListView.getItems().setAll(JPAUtils.getCategoryService().find(category.getId()).getTasks());
     }
 
     void showTaskContent(Task selectedTask) {
         titleLabel.setText(selectedTask.getName());
-        WebEngine engine = contentWebView
-                .getEngine();
-        engine
-                .setUserStyleSheetLocation("data:,body { font-size: 18px; }");
-        engine
-                .loadContent(selectedTask.getDescription());
+        WebEngine engine = contentWebView.getEngine();
+        engine.setUserStyleSheetLocation("data:,body { font-size: 18px; }");
+        engine.loadContent(selectedTask.getDescription());
     }
 
     void loadCategories() {
-        categoryListView
-                .getItems()
-                .setAll(JPAUtil
-                        .getCategoryService()
-                        .findAll());
+        categoryListView.getItems().setAll(JPAUtils.getCategoryService().findAll());
     }
 
 }

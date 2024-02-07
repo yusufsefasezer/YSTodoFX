@@ -1,7 +1,7 @@
-package com.yusufsezer.ystodofx.service;
+package com.yusufsezer.service;
 
-import com.yusufsezer.ystodofx.contract.AbstractService;
-import com.yusufsezer.ystodofx.model.Category;
+import com.yusufsezer.contract.AbstractService;
+import com.yusufsezer.model.Category;
 import javax.persistence.EntityManager;
 
 public class CategoryService extends AbstractService<Category> {

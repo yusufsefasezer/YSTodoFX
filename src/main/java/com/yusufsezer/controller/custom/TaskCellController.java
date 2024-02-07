@@ -1,15 +1,15 @@
-package com.yusufsezer.ystodofx.controller.custom;
+package com.yusufsezer.controller.custom;
 
-import com.yusufsezer.ystodofx.model.Task;
-import com.yusufsezer.ystodofx.util.JavaFXUtil;
+import com.yusufsezer.model.Task;
+import com.yusufsezer.util.JavaFXUtils;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.shape.Circle;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 
 public class TaskCellController extends ListCell<Task> {
 
@@ -26,8 +26,7 @@ public class TaskCellController extends ListCell<Task> {
     protected void updateItem(Task task, boolean empty) {
         super.updateItem(task, empty);
         if (!empty) {
-            setGraphic(JavaFXUtil.
-                    <Node>loadCustomFXML("fxml/custom/", "task", this));
+            setGraphic(JavaFXUtils.<Node>loadCustomFXML("fxml/custom/", "task", this));
             statusLabel.setText(task.getName());
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyyy");
             dateLabel.setText(sdf.format(new Date()));

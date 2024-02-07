@@ -1,9 +1,9 @@
-package com.yusufsezer.ystodofx.controller.dialog;
+package com.yusufsezer.controller.dialog;
 
-import com.yusufsezer.ystodofx.contract.DialogControllerBase;
-import com.yusufsezer.ystodofx.model.Category;
-import com.yusufsezer.ystodofx.util.DialogUtil;
-import com.yusufsezer.ystodofx.util.JavaFXUtil;
+import com.yusufsezer.contract.DialogControllerBase;
+import com.yusufsezer.model.Category;
+import com.yusufsezer.util.DialogUtils;
+import com.yusufsezer.util.JavaFXUtils;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -16,8 +16,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 
-public class CategoryDialogController implements
-        Initializable, DialogControllerBase<Category> {
+public class CategoryDialogController implements Initializable, DialogControllerBase<Category> {
 
     @FXML
     private TextField nameTextField;
@@ -33,14 +32,11 @@ public class CategoryDialogController implements
     }
 
     public static Optional<Category> createAddCategoryDialog() {
-        String title = JavaFXUtil
-                .getBundleMessage("dialog.categoryAddTitle");
-        String headerText = JavaFXUtil
-                .getBundleMessage("dialog.categoryAddHeaderText");
+        String title = JavaFXUtils.getBundleMessage("dialog.categoryAddTitle");
+        String headerText = JavaFXUtils.getBundleMessage("dialog.categoryAddHeaderText");
         String fxml = "category";
         DialogControllerBase<Category> cdc = new CategoryDialogController();
-        Dialog<Category> dialog = DialogUtil
-                .<Category>createCustomDialog(title, headerText, fxml, cdc);
+        Dialog<Category> dialog = DialogUtils.<Category>createCustomDialog(title, headerText, fxml, cdc);
         dialog.setResultConverter(p -> {
             return ButtonType.OK.equals(p) ? cdc.create() : null;
         });
@@ -49,17 +45,13 @@ public class CategoryDialogController implements
 
     public static Optional<Category>
             createEditCategoryDialog(Category category) {
-        String title = JavaFXUtil
-                .getBundleMessage("dialog.categoryEditTitle");
-        String headerText = JavaFXUtil
-                .getBundleMessage("dialog.categoryEditHeaderText");
+        String title = JavaFXUtils.getBundleMessage("dialog.categoryEditTitle");
+        String headerText = JavaFXUtils.getBundleMessage("dialog.categoryEditHeaderText");
         String fxml = "category";
         DialogControllerBase<Category> cdc = new CategoryDialogController();
-        Dialog<Category> dialog = DialogUtil
-                .<Category>createCustomDialog(title, headerText, fxml, cdc);
+        Dialog<Category> dialog = DialogUtils.<Category>createCustomDialog(title, headerText, fxml, cdc);
         cdc.set(category);
-        ButtonType deleteButtonType = new ButtonType(JavaFXUtil
-                .getBundleMessage("dialog.categoryDeleteButton"));
+        ButtonType deleteButtonType = new ButtonType(JavaFXUtils.getBundleMessage("dialog.categoryDeleteButton"));
         dialog
                 .getDialogPane()
                 .getButtonTypes()

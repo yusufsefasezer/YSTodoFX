@@ -1,6 +1,6 @@
-package com.yusufsezer.ystodofx.contract;
+package com.yusufsezer.contract;
 
-import com.yusufsezer.ystodofx.util.JPAUtil;
+import com.yusufsezer.util.JPAUtils;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -35,7 +35,7 @@ public abstract class AbstractService<T> {
             em.getTransaction().commit();
         } catch (Throwable ex) {
             Logger
-                    .getLogger(JPAUtil.class.getName())
+                    .getLogger(JPAUtils.class.getName())
                     .log(Level.SEVERE, null, ex);
             em.getTransaction().rollback();
         }
@@ -50,7 +50,7 @@ public abstract class AbstractService<T> {
             em.getTransaction().commit();
         } catch (Throwable ex) {
             Logger
-                    .getLogger(JPAUtil.class.getName())
+                    .getLogger(JPAUtils.class.getName())
                     .log(Level.SEVERE, null, ex);
             em.getTransaction().rollback();
         }
@@ -65,7 +65,7 @@ public abstract class AbstractService<T> {
             em.getTransaction().commit();
         } catch (Throwable ex) {
             Logger
-                    .getLogger(JPAUtil.class.getName())
+                    .getLogger(JPAUtils.class.getName())
                     .log(Level.SEVERE, null, ex);
             em.getTransaction().rollback();
         }

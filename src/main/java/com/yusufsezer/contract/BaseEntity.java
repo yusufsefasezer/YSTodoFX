@@ -1,4 +1,4 @@
-package com.yusufsezer.ystodofx.contract;
+package com.yusufsezer.contract;
 
 import java.util.Date;
 import javax.persistence.GeneratedValue;

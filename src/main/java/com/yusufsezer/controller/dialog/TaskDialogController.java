@@ -1,11 +1,11 @@
-package com.yusufsezer.ystodofx.controller.dialog;
+package com.yusufsezer.controller.dialog;
 
-import com.yusufsezer.ystodofx.contract.DialogControllerBase;
-import com.yusufsezer.ystodofx.model.Category;
-import com.yusufsezer.ystodofx.model.Task;
-import com.yusufsezer.ystodofx.util.DialogUtil;
-import com.yusufsezer.ystodofx.util.JPAUtil;
-import com.yusufsezer.ystodofx.util.JavaFXUtil;
+import com.yusufsezer.contract.DialogControllerBase;
+import com.yusufsezer.model.Category;
+import com.yusufsezer.model.Task;
+import com.yusufsezer.util.DialogUtils;
+import com.yusufsezer.util.JPAUtils;
+import com.yusufsezer.util.JavaFXUtils;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -17,8 +17,7 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.TextField;
 import javafx.scene.web.HTMLEditor;
 
-public class TaskDialogController implements Initializable,
-        DialogControllerBase<Task> {
+public class TaskDialogController implements Initializable, DialogControllerBase<Task> {
 
     @FXML
     private TextField nameTextField;
@@ -36,7 +35,7 @@ public class TaskDialogController implements Initializable,
     public void initialize(URL url, ResourceBundle rb) {
         categoryComboBox
                 .getItems()
-                .setAll(JPAUtil
+                .setAll(JPAUtils
                         .getCategoryService()
                         .findAll());
         statusComboBox
@@ -45,14 +44,11 @@ public class TaskDialogController implements Initializable,
     }
 
     public static Optional<Task> createAddTaskDialog(String name) {
-        String title = JavaFXUtil
-                .getBundleMessage("dialog.taskAddTitle");
-        String headerText = JavaFXUtil
-                .getBundleMessage("dialog.taskAddHeaderText");
+        String title = JavaFXUtils.getBundleMessage("dialog.taskAddTitle");
+        String headerText = JavaFXUtils.getBundleMessage("dialog.taskAddHeaderText");
         String fxml = "task";
         DialogControllerBase<Task> tdc = new TaskDialogController();
-        Dialog<Task> dialog = DialogUtil
-                .<Task>createCustomDialog(title, headerText, fxml, tdc);
+        Dialog<Task> dialog = DialogUtils.<Task>createCustomDialog(title, headerText, fxml, tdc);
         Task task = new Task();
         task.setName(name);
         tdc.set(task);
@@ -63,17 +59,13 @@ public class TaskDialogController implements Initializable,
     }
 
     public static Optional<Task> createEditTaskDialog(Task task) {
-        String title = JavaFXUtil
-                .getBundleMessage("dialog.taskEditTitle");
-        String headerText = JavaFXUtil
-                .getBundleMessage("dialog.taskEditHeaderText");
+        String title = JavaFXUtils.getBundleMessage("dialog.taskEditTitle");
+        String headerText = JavaFXUtils.getBundleMessage("dialog.taskEditHeaderText");
         String fxml = "task";
         DialogControllerBase<Task> tdc = new TaskDialogController();
-        Dialog<Task> dialog = DialogUtil
-                .<Task>createCustomDialog(title, headerText, fxml, tdc);
+        Dialog<Task> dialog = DialogUtils.<Task>createCustomDialog(title, headerText, fxml, tdc);
         tdc.set(task);
-        ButtonType deleteButtonType = new ButtonType(JavaFXUtil
-                .getBundleMessage("dialog.taskDeleteButton"));
+        ButtonType deleteButtonType = new ButtonType(JavaFXUtils.getBundleMessage("dialog.taskDeleteButton"));
         dialog
                 .getDialogPane()
                 .getButtonTypes()
