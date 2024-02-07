@@ -1,13 +1,13 @@
 package com.yusufsezer.contract;
 
 import com.yusufsezer.util.JPAUtils;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 
 public abstract class AbstractService<T> {
 
@@ -34,9 +34,7 @@ public abstract class AbstractService<T> {
             em.persist(entity);
             em.getTransaction().commit();
         } catch (Throwable ex) {
-            Logger
-                    .getLogger(JPAUtils.class.getName())
-                    .log(Level.SEVERE, null, ex);
+            Logger.getLogger(JPAUtils.class.getName()).log(Level.SEVERE, null, ex);
             em.getTransaction().rollback();
         }
     }
@@ -49,9 +47,7 @@ public abstract class AbstractService<T> {
             em.merge(entity);
             em.getTransaction().commit();
         } catch (Throwable ex) {
-            Logger
-                    .getLogger(JPAUtils.class.getName())
-                    .log(Level.SEVERE, null, ex);
+            Logger.getLogger(JPAUtils.class.getName()).log(Level.SEVERE, null, ex);
             em.getTransaction().rollback();
         }
     }
@@ -64,9 +60,7 @@ public abstract class AbstractService<T> {
             em.remove(em.merge(entity));
             em.getTransaction().commit();
         } catch (Throwable ex) {
-            Logger
-                    .getLogger(JPAUtils.class.getName())
-                    .log(Level.SEVERE, null, ex);
+            Logger.getLogger(JPAUtils.class.getName()).log(Level.SEVERE, null, ex);
             em.getTransaction().rollback();
         }
     }

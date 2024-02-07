@@ -2,7 +2,7 @@ package com.yusufsezer.service;
 
 import com.yusufsezer.contract.AbstractService;
 import com.yusufsezer.model.Task;
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 public class TaskService extends AbstractService<Task> {
 
