@@ -4,7 +4,7 @@ import com.yusufsezer.contract.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Lob;
-import jakarta.persistence.OneToOne;
+import jakarta.persistence.ManyToOne;
 import java.io.Serializable;
 import org.hibernate.annotations.Where;
 
@@ -25,7 +25,7 @@ public class Task extends BaseEntity implements Serializable {
     @Column(length = 1000)
     private String description;
 
-    @OneToOne
+    @ManyToOne
     private Category category;
 
     public Status getStatus() {
