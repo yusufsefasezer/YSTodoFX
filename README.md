@@ -2,7 +2,7 @@
 
 YSTodoFX is a JavaFX application for tracking, managing and organizing daily tasks.
 
-This project developed with Java(JDK 14), JavaFX(OpenJFX), Ikonli(JavaFX font icon package), Hibernate(JPA implementation), HSQLDB and Maven.
+This project developed with Java(JDK 21), JavaFX(OpenJFX), Ikonli(JavaFX font icon package), Hibernate(JPA implementation), HSQLDB and Maven.
 
 ## [Download](https://github.com/yusufsefasezer/YSTodoFX/archive/master.zip)
 
@@ -14,6 +14,13 @@ If you have maven execute the below command to run.
 
 ```
 mvn javafx:run
+```
+
+You can use the following commands to generate a Jar file.
+
+```
+mvn package
+java -jar target\YSTodoFX.jar
 ```
 
 ## Screenshot
