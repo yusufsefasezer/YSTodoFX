@@ -49,54 +49,38 @@ public class MainController implements Initializable {
     @FXML
     private TextField quickAddTextField;
 
-    ObservableList<Category> observableList = FXCollections
-            .observableList(DummyDataUtils.CATEGORIES);
+    ObservableList<Category> observableList = FXCollections.observableList(DummyDataUtils.CATEGORIES);
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // Category
-        categoryListView
-                .setCellFactory(p -> new CategoryCellController());
-        categoryListView
-                .getSelectionModel()
-                .selectedItemProperty()
+        categoryListView.setCellFactory(p -> new CategoryCellController());
+        categoryListView.getSelectionModel().selectedItemProperty()
                 .addListener((ov, oldValue, newValue) -> {
                     if (newValue != null) {
                         showCategoryTasks(newValue);
                     }
-                    taskListView
-                            .getSelectionModel()
-                            .selectFirst();
+                    taskListView.getSelectionModel().selectFirst();
                 });
         loadCategories();
-        categoryListView
-                .getSelectionModel()
-                .selectFirst();
+        categoryListView.getSelectionModel().selectFirst();
 
         // Task
-        taskListView
-                .setCellFactory(p -> new TaskCellController());
-        taskListView
-                .getSelectionModel()
-                .selectedItemProperty()
+        taskListView.setCellFactory(p -> new TaskCellController());
+        taskListView.getSelectionModel().selectedItemProperty()
                 .addListener((ov, oldValue, newValue) -> {
                     if (newValue != null) {
                         showTaskContent(newValue);
                     }
                 });
-        taskListView
-                .getSelectionModel()
-                .selectFirst();
+        taskListView.getSelectionModel().selectFirst();
     }
 
     @FXML
     void onAddNewCategory(MouseEvent event) {
-        Optional<Category> result = CategoryDialogController
-                .createAddCategoryDialog();
+        Optional<Category> result = CategoryDialogController.createAddCategoryDialog();
         if (result.isPresent()) {
-            JPAUtils
-                    .getCategoryService()
-                    .create(result.get());
+            JPAUtils.getCategoryService().create(result.get());
             loadCategories();
         }
     }
@@ -105,12 +89,9 @@ public class MainController implements Initializable {
     void onKeyTaskReleased(KeyEvent event) {
         boolean isEnterPressed = event.getCode() == KeyCode.ENTER;
         if (isEnterPressed) {
-            Optional<Task> result = TaskDialogController
-                    .createAddTaskDialog(quickAddTextField.getText());
+            Optional<Task> result = TaskDialogController.createAddTaskDialog(quickAddTextField.getText());
             if (result.isPresent()) {
-                JPAUtils
-                        .getTaskService()
-                        .create(result.get());
+                JPAUtils.getTaskService().create(result.get());
             }
             quickAddTextField.clear();
         }
@@ -118,26 +99,21 @@ public class MainController implements Initializable {
 
     @FXML
     void onKeySearchReleased(KeyEvent event) {
-        if (event.getSource() instanceof TextField) {
-            TextField sourceTextField = (TextField) event.getSource();
+        if (event.getSource() instanceof TextField sourceTextField) {
             String searchString = sourceTextField.getText();
             observableList.filtered(s -> {
                 return searchString.isEmpty()
                         ? true
-                        : s.getName().toLowerCase()
-                                .contains(searchString.toLowerCase());
+                        : s.getName().toLowerCase().contains(searchString.toLowerCase());
             });
         }
     }
 
     @FXML
     void onMouseEditPressed(MouseEvent event) {
-        Task selectedTask = taskListView
-                .getSelectionModel()
-                .getSelectedItem();
+        Task selectedTask = taskListView.getSelectionModel().getSelectedItem();
         if (selectedTask != null) {
-            Optional<Task> result = TaskDialogController
-                    .createEditTaskDialog(selectedTask);
+            Optional<Task> result = TaskDialogController.createEditTaskDialog(selectedTask);
             if (result.isPresent()) {
                 JPAUtils.getTaskService().edit(result.get());
             }
@@ -160,7 +136,7 @@ public class MainController implements Initializable {
         Alert aboutDialog = new Alert(Alert.AlertType.INFORMATION);
         aboutDialog.setTitle("www.yusufsezer.com");
         aboutDialog.setHeaderText("YSTodoFX");
-        aboutDialog.setContentText("Created by Yusuf SEZER");
+        aboutDialog.setContentText("Created by Yusuf Sezer");
         aboutDialog.show();
     }
 

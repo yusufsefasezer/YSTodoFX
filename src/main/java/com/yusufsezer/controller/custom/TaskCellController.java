@@ -26,7 +26,8 @@ public class TaskCellController extends ListCell<Task> {
     protected void updateItem(Task task, boolean empty) {
         super.updateItem(task, empty);
         if (!empty) {
-            setGraphic(JavaFXUtils.<Node>loadCustomFXML("fxml/custom/", "task", this));
+            Node node = JavaFXUtils.<Node>loadCustomFXML("fxml/custom/", "task", this);
+            setGraphic(node);
             statusLabel.setText(task.getName());
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyyy");
             dateLabel.setText(sdf.format(new Date()));

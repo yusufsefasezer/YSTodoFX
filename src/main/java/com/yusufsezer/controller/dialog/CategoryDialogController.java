@@ -52,10 +52,7 @@ public class CategoryDialogController implements Initializable, DialogController
         Dialog<Category> dialog = DialogUtils.<Category>createCustomDialog(title, headerText, fxml, cdc);
         cdc.set(category);
         ButtonType deleteButtonType = new ButtonType(JavaFXUtils.getBundleMessage("dialog.categoryDeleteButton"));
-        dialog
-                .getDialogPane()
-                .getButtonTypes()
-                .add(deleteButtonType);
+        dialog.getDialogPane().getButtonTypes().add(deleteButtonType);
         dialog.setResultConverter(p -> {
             if (ButtonType.OK.equals(p)) {
                 return cdc.edit(category);

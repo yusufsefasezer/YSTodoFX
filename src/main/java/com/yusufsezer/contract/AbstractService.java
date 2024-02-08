@@ -12,83 +12,83 @@ import java.util.logging.Logger;
 public abstract class AbstractService<T> {
 
     private final Class<T> entityClass;
-    private EntityManager em;
+    private EntityManager entityManager;
 
     public AbstractService(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
 
     public EntityManager getEntityManager() {
-        return em;
+        return entityManager;
     }
 
     public void setEntityManager(EntityManager entityManager) {
-        this.em = entityManager;
+        this.entityManager = entityManager;
     }
 
     public void create(T entity) {
         try {
-            if (!em.getTransaction().isActive()) {
-                em.getTransaction().begin();
+            if (!entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().begin();
             }
-            em.persist(entity);
-            em.getTransaction().commit();
+            entityManager.persist(entity);
+            entityManager.getTransaction().commit();
         } catch (Throwable ex) {
             Logger.getLogger(JPAUtils.class.getName()).log(Level.SEVERE, null, ex);
-            em.getTransaction().rollback();
+            entityManager.getTransaction().rollback();
         }
     }
 
     public void edit(T entity) {
         try {
-            if (!em.getTransaction().isActive()) {
-                em.getTransaction().begin();
+            if (!entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().begin();
             }
-            em.merge(entity);
-            em.getTransaction().commit();
+            entityManager.merge(entity);
+            entityManager.getTransaction().commit();
         } catch (Throwable ex) {
             Logger.getLogger(JPAUtils.class.getName()).log(Level.SEVERE, null, ex);
-            em.getTransaction().rollback();
+            entityManager.getTransaction().rollback();
         }
     }
 
     public void remove(T entity) {
         try {
-            if (!em.getTransaction().isActive()) {
-                em.getTransaction().begin();
+            if (!entityManager.getTransaction().isActive()) {
+                entityManager.getTransaction().begin();
             }
-            em.remove(em.merge(entity));
-            em.getTransaction().commit();
+            entityManager.remove(entityManager.merge(entity));
+            entityManager.getTransaction().commit();
         } catch (Throwable ex) {
             Logger.getLogger(JPAUtils.class.getName()).log(Level.SEVERE, null, ex);
-            em.getTransaction().rollback();
+            entityManager.getTransaction().rollback();
         }
     }
 
     public T find(Object id) {
-        return em.find(entityClass, id);
+        return entityManager.find(entityClass, id);
     }
 
     public List<T> findAll() {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
-        return em.createQuery(cq).getResultList();
+        return entityManager.createQuery(cq).getResultList();
     }
 
     public List<T> findRange(int[] range) {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
-        Query q = em.createQuery(cq);
+        Query q = entityManager.createQuery(cq);
         q.setMaxResults(range[1] - range[0] + 1);
         q.setFirstResult(range[0]);
         return q.getResultList();
     }
 
     public int count() {
-        CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
+        CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
         Root<T> rt = cq.from(entityClass);
-        cq.select(em.getCriteriaBuilder().count(rt));
-        Query q = em.createQuery(cq);
+        cq.select(entityManager.getCriteriaBuilder().count(rt));
+        Query q = entityManager.createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
 

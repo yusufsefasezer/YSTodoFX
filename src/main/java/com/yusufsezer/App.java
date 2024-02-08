@@ -63,7 +63,6 @@ public class App {
         public void stop() throws Exception {
             entityManager.getEntityManagerFactory().close();
         }
-
     }
 
 }

@@ -11,12 +11,12 @@ import java.util.logging.Logger;
 public class JPAUtils {
 
     private static final String PERSISTENCE_UNIT_NAME = "YSTodoFXPU";
-    private static EntityManagerFactory emf;
-    private static EntityManager em;
+    private static EntityManagerFactory entityManagerFactory;
+    private static EntityManager entityManager;
 
     static {
         try {
-            emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+            entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
         } catch (Throwable ex) {
             Logger.getLogger(JPAUtils.class.getName()).log(Level.SEVERE, null, ex);
             throw new ExceptionInInitializerError(ex);
@@ -24,10 +24,10 @@ public class JPAUtils {
     }
 
     public static EntityManager getEntityManager() {
-        if (em == null) {
-            em = emf.createEntityManager();
+        if (entityManager == null) {
+            entityManager = entityManagerFactory.createEntityManager();
         }
-        return em;
+        return entityManager;
     }
 
     public static CategoryService getCategoryService() {
@@ -37,4 +37,5 @@ public class JPAUtils {
     public static TaskService getTaskService() {
         return new TaskService(getEntityManager());
     }
+
 }

@@ -33,14 +33,8 @@ public class TaskDialogController implements Initializable, DialogControllerBase
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        categoryComboBox
-                .getItems()
-                .setAll(JPAUtils
-                        .getCategoryService()
-                        .findAll());
-        statusComboBox
-                .getItems()
-                .addAll(Task.Status.values());
+        categoryComboBox.getItems().setAll(JPAUtils.getCategoryService().findAll());
+        statusComboBox.getItems().addAll(Task.Status.values());
     }
 
     public static Optional<Task> createAddTaskDialog(String name) {
@@ -66,10 +60,7 @@ public class TaskDialogController implements Initializable, DialogControllerBase
         Dialog<Task> dialog = DialogUtils.<Task>createCustomDialog(title, headerText, fxml, tdc);
         tdc.set(task);
         ButtonType deleteButtonType = new ButtonType(JavaFXUtils.getBundleMessage("dialog.taskDeleteButton"));
-        dialog
-                .getDialogPane()
-                .getButtonTypes()
-                .add(deleteButtonType);
+        dialog.getDialogPane().getButtonTypes().add(deleteButtonType);
         dialog.setResultConverter(p -> {
             if (ButtonType.OK.equals(p)) {
                 return tdc.edit(task);
