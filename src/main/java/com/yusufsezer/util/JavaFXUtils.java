@@ -14,23 +14,23 @@ public class JavaFXUtils {
         return loadFXMLFromDirectory(FXML_PATH, fxml);
     }
 
-    public static FXMLLoader loadFXMLFromDirectory(String dir, String fxml) {
-        return loadFXMLFromResource(dir + fxml + ".fxml");
+    public static FXMLLoader loadFXMLFromDirectory(String directory, String fxmlFileName) {
+        return loadFXMLFromResource(directory + fxmlFileName + ".fxml");
     }
 
-    public static FXMLLoader loadFXMLFromResource(String fxml) {
-        URL url = JavaFXUtils.class.getClassLoader().getResource(fxml);
+    public static FXMLLoader loadFXMLFromResource(String fxmlPath) {
+        URL url = JavaFXUtils.class.getClassLoader().getResource(fxmlPath);
         ResourceBundle rb = ResourceBundle.getBundle(JavaFXUtils.BUNDLE_NAME);
         return new FXMLLoader(url, rb);
     }
 
-    public static String getBundleMessage(String msg) {
-        return ResourceBundle.getBundle(JavaFXUtils.BUNDLE_NAME).getString(msg);
+    public static String getBundleMessage(String message) {
+        return ResourceBundle.getBundle(JavaFXUtils.BUNDLE_NAME).getString(message);
     }
 
-    public static <T> T loadCustomFXML(String dir, String fxml, Object controller) {
+    public static <T> T loadCustomFXML(String directory, String fxml, Object controller) {
         try {
-            FXMLLoader loader = loadFXMLFromDirectory(dir, fxml);
+            FXMLLoader loader = loadFXMLFromDirectory(directory, fxml);
             loader.setController(controller);
             return loader.<T>load();
         } catch (IOException e) {
