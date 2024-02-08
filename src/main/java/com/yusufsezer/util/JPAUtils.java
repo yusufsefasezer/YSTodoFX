@@ -13,6 +13,8 @@ public class JPAUtils {
     private static final String PERSISTENCE_UNIT_NAME = "YSTodoFXPU";
     private static EntityManagerFactory entityManagerFactory;
     private static EntityManager entityManager;
+    private static CategoryService categoryService;
+    private static TaskService taskService;
 
     static {
         try {
@@ -31,11 +33,17 @@ public class JPAUtils {
     }
 
     public static CategoryService getCategoryService() {
-        return new CategoryService(getEntityManager());
+        if (categoryService == null) {
+            categoryService = new CategoryService(getEntityManager());
+        }
+        return categoryService;
     }
 
     public static TaskService getTaskService() {
-        return new TaskService(getEntityManager());
+        if (taskService == null) {
+            taskService = new TaskService(getEntityManager());
+        }
+        return taskService;
     }
 
 }

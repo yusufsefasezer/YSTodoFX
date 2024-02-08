@@ -43,8 +43,7 @@ public class CategoryDialogController implements Initializable, DialogController
         return dialog.showAndWait();
     }
 
-    public static Optional<Category>
-            createEditCategoryDialog(Category category) {
+    public static Optional<Category> createEditCategoryDialog(Category category) {
         String title = JavaFXUtils.getBundleMessage("dialog.categoryEditTitle");
         String headerText = JavaFXUtils.getBundleMessage("dialog.categoryEditHeaderText");
         String fxml = "category";

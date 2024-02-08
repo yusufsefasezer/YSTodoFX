@@ -14,7 +14,8 @@ public class DialogUtils {
         Dialog<T> dialog = new Dialog<>();
         dialog.setTitle(title);
         dialog.setHeaderText(headerText);
-        dialog.getDialogPane().setContent(JavaFXUtils.<Node>loadCustomFXML(DIALOG_FOLDER, fxml, controller));
+        Node node = JavaFXUtils.<Node>loadCustomFXML(DIALOG_FOLDER, fxml, controller);
+        dialog.getDialogPane().setContent(node);
         dialog.getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CLOSE);
         return dialog;
     }

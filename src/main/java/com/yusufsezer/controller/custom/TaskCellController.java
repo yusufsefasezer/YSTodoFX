@@ -39,4 +39,5 @@ public class TaskCellController extends ListCell<Task> {
             setGraphic(null);
         }
     }
+
 }

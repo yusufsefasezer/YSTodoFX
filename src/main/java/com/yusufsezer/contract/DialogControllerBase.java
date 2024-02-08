@@ -7,4 +7,5 @@ public interface DialogControllerBase<T> {
     public abstract T edit(T entity);
 
     public abstract void set(T entity);
+
 }

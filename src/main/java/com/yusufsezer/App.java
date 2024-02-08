@@ -8,6 +8,7 @@ import com.yusufsezer.util.DummyDataUtils;
 import com.yusufsezer.util.JPAUtils;
 import com.yusufsezer.util.JavaFXUtils;
 import jakarta.persistence.EntityManager;
+import java.util.List;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -56,7 +57,12 @@ public class App {
                     entityManager.persist(task);
                 }
             }
+
             entityManager.getTransaction().commit();
+
+            Category foundCategory = categoryService.find(1L);
+            List<Task> tasks = foundCategory.getTasks();
+            tasks.forEach(System.out::println);
         }
 
         @Override

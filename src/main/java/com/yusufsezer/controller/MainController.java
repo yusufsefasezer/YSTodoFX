@@ -6,9 +6,12 @@ import com.yusufsezer.controller.dialog.CategoryDialogController;
 import com.yusufsezer.controller.dialog.TaskDialogController;
 import com.yusufsezer.model.Category;
 import com.yusufsezer.model.Task;
+import com.yusufsezer.service.CategoryService;
+import com.yusufsezer.service.TaskService;
 import com.yusufsezer.util.DummyDataUtils;
 import com.yusufsezer.util.JPAUtils;
 import java.net.URL;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -80,7 +83,8 @@ public class MainController implements Initializable {
     void onAddNewCategory(MouseEvent event) {
         Optional<Category> result = CategoryDialogController.createAddCategoryDialog();
         if (result.isPresent()) {
-            JPAUtils.getCategoryService().create(result.get());
+            CategoryService categoryService = JPAUtils.getCategoryService();
+            categoryService.create(result.get());
             loadCategories();
         }
     }
@@ -91,7 +95,8 @@ public class MainController implements Initializable {
         if (isEnterPressed) {
             Optional<Task> result = TaskDialogController.createAddTaskDialog(quickAddTextField.getText());
             if (result.isPresent()) {
-                JPAUtils.getTaskService().create(result.get());
+                TaskService taskService = JPAUtils.getTaskService();
+                taskService.create(result.get());
             }
             quickAddTextField.clear();
         }
@@ -115,7 +120,8 @@ public class MainController implements Initializable {
         if (selectedTask != null) {
             Optional<Task> result = TaskDialogController.createEditTaskDialog(selectedTask);
             if (result.isPresent()) {
-                JPAUtils.getTaskService().edit(result.get());
+                TaskService taskService = JPAUtils.getTaskService();
+                taskService.edit(result.get());
             }
         }
     }
@@ -125,7 +131,8 @@ public class MainController implements Initializable {
         Task selectedTask = taskListView.getSelectionModel().getSelectedItem();
         if (selectedTask != null) {
             selectedTask.setDeleted(true);
-            JPAUtils.getTaskService().edit(selectedTask);
+            TaskService taskService = JPAUtils.getTaskService();
+            taskService.edit(selectedTask);
             taskListView.getItems().remove(selectedTask);
             taskListView.getSelectionModel().selectFirst();
         }
@@ -141,7 +148,11 @@ public class MainController implements Initializable {
     }
 
     void showCategoryTasks(Category category) {
-        taskListView.getItems().setAll(JPAUtils.getCategoryService().find(category.getId()).getTasks());
+        CategoryService categoryService = JPAUtils.getCategoryService();
+        Long categoryId = category.getId();
+        Category foundCategory = categoryService.find(categoryId);
+        List<Task> categoryTasks = foundCategory.getTasks();
+        taskListView.getItems().setAll(categoryTasks);
     }
 
     void showTaskContent(Task selectedTask) {
@@ -152,7 +163,9 @@ public class MainController implements Initializable {
     }
 
     void loadCategories() {
-        categoryListView.getItems().setAll(JPAUtils.getCategoryService().findAll());
+        CategoryService categoryService = JPAUtils.getCategoryService();
+        List<Category> categories = categoryService.findAll();
+        categoryListView.getItems().setAll(categories);
     }
 
 }

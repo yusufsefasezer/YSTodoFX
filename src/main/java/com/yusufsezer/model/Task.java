@@ -21,6 +21,7 @@ public class Task extends BaseEntity implements Serializable {
 
     private Status status;
     private String name;
+
     @Lob
     @Column(length = 1000)
     private String description;
